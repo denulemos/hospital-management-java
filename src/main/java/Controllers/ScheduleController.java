@@ -36,7 +36,7 @@ public class ScheduleController {
         Statement statement = connection.createStatement();
          ResultSet result;
         
-         result = statement.executeQuery("SELECT * FROM schedule WHERE patient LIKE '" + patient +"%' AND patient IS NULL");
+         result = statement.executeQuery("SELECT * FROM schedule WHERE patient LIKE '" + patient +"%'");
         
         return result;
     }

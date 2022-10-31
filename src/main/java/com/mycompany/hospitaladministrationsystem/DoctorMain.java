@@ -11,12 +11,22 @@ import javax.swing.JOptionPane;
  * @author Denu
  */
 public class DoctorMain extends javax.swing.JFrame {
-
+    
+    ScheduleDoctor scheduleDoctor;
+    GenerateReportDoctor generateReportDoctor;
+    AttendPatient attendPatient;
+    
     /**
      * Creates new form NewJFrame
      */
     public DoctorMain() {
         initComponents();
+        scheduleDoctor = new ScheduleDoctor();
+        generateReportDoctor = new GenerateReportDoctor();
+        attendPatient = new AttendPatient();
+        add(scheduleDoctor);
+        add(generateReportDoctor);
+        add(attendPatient);
     }
 
     /**
@@ -31,9 +41,12 @@ public class DoctorMain extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        ScheduleMenu = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
         LogOutMenu = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
@@ -43,14 +56,51 @@ public class DoctorMain extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(javax.swing.UIManager.getDefaults().getColor("Button.default.hoverBorderColor"));
 
-        jMenu1.setText("Schedule");
-        jMenu1.setToolTipText("");
-        jMenuBar1.add(jMenu1);
+        ScheduleMenu.setText("Schedule");
+        ScheduleMenu.setToolTipText("");
+        ScheduleMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ScheduleMenuMouseClicked(evt);
+            }
+        });
+        ScheduleMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ScheduleMenuActionPerformed(evt);
+            }
+        });
+
+        jMenuItem3.setText("Administrate");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        ScheduleMenu.add(jMenuItem3);
+
+        jMenuBar1.add(ScheduleMenu);
 
         jMenu2.setText("Reports");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem4.setText("Generate");
+        jMenu2.add(jMenuItem4);
+
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Patient");
+
+        jMenuItem5.setText("Attend");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem5);
+
         jMenuBar1.add(jMenu3);
 
         LogOutMenu.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Red"));
@@ -73,11 +123,11 @@ public class DoctorMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 872, Short.MAX_VALUE)
+            .addGap(0, 1002, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 512, Short.MAX_VALUE)
+            .addGap(0, 729, Short.MAX_VALUE)
         );
 
         pack();
@@ -93,6 +143,32 @@ public class DoctorMain extends javax.swing.JFrame {
                 System.exit(0);
             }
     }//GEN-LAST:event_LogOutMenuMouseClicked
+
+    private void ScheduleMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScheduleMenuActionPerformed
+        
+    }//GEN-LAST:event_ScheduleMenuActionPerformed
+
+    private void ScheduleMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ScheduleMenuMouseClicked
+        
+    }//GEN-LAST:event_ScheduleMenuMouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        scheduleDoctor.setVisible(true);
+        generateReportDoctor.setVisible(false);
+        attendPatient.setVisible(false);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+         scheduleDoctor.setVisible(false);
+        generateReportDoctor.setVisible(true);
+        attendPatient.setVisible(false);
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+         scheduleDoctor.setVisible(false);
+        generateReportDoctor.setVisible(false);
+        attendPatient.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -132,11 +208,14 @@ public class DoctorMain extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu LogOutMenu;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu ScheduleMenu;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
     // End of variables declaration//GEN-END:variables
 }

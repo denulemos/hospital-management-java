@@ -4,6 +4,11 @@
  */
 package com.mycompany.hospitaladministrationsystem;
 
+import Controllers.UserController;
+import Models.UserModel;
+import Provider.ConnectionProvider;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,10 +22,13 @@ public class main extends javax.swing.JFrame {
      */
     
     DoctorMain doctorMain;
+    AdminMain adminMain;
+    Connection connection = ConnectionProvider.getConnection();
     
     public main() {
         initComponents();
         doctorMain = new DoctorMain();
+        adminMain = new AdminMain();
     }
 
     /**
@@ -32,9 +40,7 @@ public class main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton2 = new javax.swing.JButton();
         passwordField = new javax.swing.JPasswordField();
-        jButton3 = new javax.swing.JButton();
         idField = new javax.swing.JTextField();
         loginButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -42,21 +48,13 @@ public class main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setText("Register Doctor");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordFieldActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Register Consultant");
-
+        loginButton.setBackground(new java.awt.Color(0, 153, 102));
         loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,10 +75,8 @@ public class main extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1)
-                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                     .addComponent(idField)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                     .addComponent(passwordField))
                 .addContainerGap(459, Short.MAX_VALUE))
         );
@@ -97,31 +93,48 @@ public class main extends javax.swing.JFrame {
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(loginButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addContainerGap(83, Short.MAX_VALUE))
+                .addContainerGap(141, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_passwordFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-          if (idField.getText().isEmpty() || idField.getText().isEmpty()) {
+        String id = idField.getText();
+        String password = passwordField.getText();
+        
+        if (id.isEmpty() || password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "All fields must be filled");
         }
         else {
-            doctorMain.setVisible(true);
-            setVisible(false);
+            try {
+                UserController userController = new UserController();
+                ResultSet result = userController.loginUser(id, password);
+                if (result.next()){
+                     UserModel user = UserController.setGlobalUser(result.getString(2), result.getString(1), result.getString(4));  
+                     if (user.getSpecialty() == null){
+                         adminMain.setVisible(true);
+                         new main().setVisible(false);
+                     }
+                     else {
+                         doctorMain.setVisible(true);
+                         new main().setVisible(false);
+                     }
+                     JOptionPane.showMessageDialog(null, "Welcome " + user.getFullname() + "!");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "User not found");
+                }
+               
+            }
+            catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e);
+            }
+           
            
         }
     }//GEN-LAST:event_loginButtonActionPerformed
@@ -163,8 +176,6 @@ public class main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField idField;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JButton loginButton;
