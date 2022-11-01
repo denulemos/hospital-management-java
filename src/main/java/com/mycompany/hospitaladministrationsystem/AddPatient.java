@@ -81,6 +81,11 @@ public class AddPatient extends javax.swing.JInternalFrame {
 
         addPatientCancel.setBackground(new java.awt.Color(153, 0, 0));
         addPatientCancel.setText("Cancel");
+        addPatientCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addPatientCancelActionPerformed(evt);
+            }
+        });
 
         addPatientHistory.setColumns(20);
         addPatientHistory.setRows(5);
@@ -103,28 +108,24 @@ public class AddPatient extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(132, 132, 132)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(addPatientId)
+                        .addComponent(jLabel2)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addComponent(addPatientName)
+                        .addComponent(addPatientSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                        .addComponent(addPatientCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(radioMan)
+                        .addGap(32, 32, 32)
+                        .addComponent(radioFemale))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(addPatientId)
-                                .addComponent(jLabel2)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
-                                .addComponent(addPatientName)
-                                .addComponent(addPatientSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(addPatientCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(radioMan)
-                                .addGap(32, 32, 32)
-                                .addComponent(radioFemale))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(patientBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel5)))
-                        .addGap(472, 486, Short.MAX_VALUE))))
+                        .addComponent(patientBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)))
+                .addContainerGap(649, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -145,7 +146,7 @@ public class AddPatient extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(patientBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,6 +173,10 @@ public class AddPatient extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_addPatientSubmitActionPerformed
+
+    private void addPatientCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientCancelActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_addPatientCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

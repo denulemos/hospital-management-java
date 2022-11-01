@@ -43,6 +43,7 @@ public class DoctorMain extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         ScheduleMenu = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -69,13 +70,16 @@ public class DoctorMain extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem3.setText("Administrate");
+        jMenuItem3.setText("Add Option");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         ScheduleMenu.add(jMenuItem3);
+
+        jMenuItem6.setText("See Schedule");
+        ScheduleMenu.add(jMenuItem6);
 
         jMenuBar1.add(ScheduleMenu);
 
@@ -217,5 +221,6 @@ public class DoctorMain extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,6 +17,7 @@ public class AdminMain extends javax.swing.JFrame {
     AddPatient addPatient;
     RegisterDoctorScreen registerDoctorScreen;
     RegisterConsultantScreen registerAdmin;
+    AttendPatient editPatient;
     
     /**
      * Creates new form AdminMain
@@ -28,11 +29,13 @@ public class AdminMain extends javax.swing.JFrame {
         addPatient = new AddPatient();
         registerDoctorScreen = new RegisterDoctorScreen();
         registerAdmin = new RegisterConsultantScreen();
+        editPatient = new AttendPatient();
         add(scheduleAdmin);
         add(generateReportAdmin);
         add(addPatient);
         add(registerDoctorScreen);
         add(registerAdmin);
+        add(editPatient);
     }
 
     /**
@@ -94,6 +97,11 @@ public class AdminMain extends javax.swing.JFrame {
         jMenu2.add(jMenuItem2);
 
         jMenuItem6.setText("Edit Patient");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem6);
 
         jMenuBar1.add(jMenu2);
@@ -159,6 +167,7 @@ public class AdminMain extends javax.swing.JFrame {
         addPatient.setVisible(false);
         registerDoctorScreen.setVisible(true);
         registerAdmin.setVisible(false);
+        editPatient.setVisible(false);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -167,6 +176,7 @@ public class AdminMain extends javax.swing.JFrame {
         addPatient.setVisible(true);
         registerDoctorScreen.setVisible(false);
         registerAdmin.setVisible(false);
+         editPatient.setVisible(false);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -175,6 +185,7 @@ public class AdminMain extends javax.swing.JFrame {
         addPatient.setVisible(false);
         registerDoctorScreen.setVisible(false);
         registerAdmin.setVisible(false);
+         editPatient.setVisible(false);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
@@ -183,6 +194,7 @@ public class AdminMain extends javax.swing.JFrame {
         addPatient.setVisible(false);
         registerDoctorScreen.setVisible(false);
         registerAdmin.setVisible(false);
+         editPatient.setVisible(false);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
@@ -191,7 +203,17 @@ public class AdminMain extends javax.swing.JFrame {
         addPatient.setVisible(false);
         registerDoctorScreen.setVisible(false);
         registerAdmin.setVisible(true);
+         editPatient.setVisible(false);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        scheduleAdmin.setVisible(false);
+        generateReportAdmin.setVisible(false);
+        addPatient.setVisible(false);
+        registerDoctorScreen.setVisible(false);
+        registerAdmin.setVisible(false);
+         editPatient.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
