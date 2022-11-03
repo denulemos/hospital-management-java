@@ -44,8 +44,8 @@ public class UserController {
         return result;
     }
   
-   public static UserModel setGlobalUser (String fullname, String id, String specialty) {
-       UserModel user = new UserModel(fullname, id, specialty);
+   public static UserModel setGlobalUser (String name, String lastname, String id, String specialty, int price) {
+       UserModel user = new UserModel(name, lastname, id, specialty, price);
        currentUser = user;
        return user;
    }

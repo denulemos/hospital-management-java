@@ -25,18 +25,11 @@ public class DoctorController {
         return result;
     }
      
-     public void addDoctor (String id, String fullname, String password, String specialty) throws SQLException {
+     public void addDoctor (String id, String name, String lastname, String password, String specialty, int price) throws SQLException {
         Statement statement = ConnectionProvider.getConnection().createStatement();
-        statement.executeUpdate("INSERT INTO users VALUES('"+id+"', '"+fullname+"', '"+password+"', '"+specialty+"')");
+        statement.executeUpdate("INSERT INTO users (`ID`, `Name`, `Lastname`, `Password`, `Specialty`, `Price`) VALUES('"+id+"', '"+name+"', '"+lastname+"', '"+password+"', '"+ specialty +"', "+price+")");
     }
-     
-     public ResultSet getDoctorById (String id) throws SQLException {
-        Statement statement = ConnectionProvider.getConnection().createStatement();
-        ResultSet result = statement.executeQuery("SELECT * FROM users WHERE id LIKE '" + id +"%'");
-        
-        
-        return result;
-    }
+    
      
       public ResultSet getDoctorBySpecialty (String specialty, Connection connection) throws SQLException {
         Statement statement = connection.createStatement();

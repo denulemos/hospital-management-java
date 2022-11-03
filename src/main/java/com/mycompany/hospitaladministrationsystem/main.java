@@ -4,6 +4,8 @@
  */
 package com.mycompany.hospitaladministrationsystem;
 
+import Screens.DoctorMain;
+import Screens.AdminMain;
 import Controllers.UserController;
 import Models.UserModel;
 import Provider.ConnectionProvider;
@@ -115,7 +117,9 @@ public class main extends javax.swing.JFrame {
                 UserController userController = new UserController();
                 ResultSet result = userController.loginUser(id, password);
                 if (result.next()){
-                     UserModel user = UserController.setGlobalUser(result.getString(2), result.getString(1), result.getString(4));  
+                    UserModel user;
+                         user = UserController.setGlobalUser(result.getString(2), result.getString(3), result.getString(1), result.getString(5), Integer.parseInt(result.getString(6)));  
+                     
                      if (user.getSpecialty() == null){
                          adminMain.setVisible(true);
                          new main().setVisible(false);
@@ -124,7 +128,7 @@ public class main extends javax.swing.JFrame {
                          doctorMain.setVisible(true);
                          new main().setVisible(false);
                      }
-                     JOptionPane.showMessageDialog(null, "Welcome " + user.getFullname() + "!");
+                     JOptionPane.showMessageDialog(null, "Welcome " + user.getName() +" "+ user.getLastname() + "!");
                 }
                 else {
                     JOptionPane.showMessageDialog(null, "User not found");
