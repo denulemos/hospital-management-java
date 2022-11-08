@@ -4,6 +4,7 @@
  */
 package Screens;
 
+import Controllers.AdministratorController;
 import Controllers.UserController;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,7 +21,8 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
      * Creates new form RegisterScreen
      */
     
-    UserController controller = new UserController();
+    AdministratorController controller = new AdministratorController();
+    UserController userController = new UserController();
     
     public RegisterConsultantScreen() {
         initComponents();
@@ -35,7 +37,7 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        nameUser = new javax.swing.JTextField();
+        adminLastname = new javax.swing.JTextField();
         adminId = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -43,6 +45,8 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         adminPassword = new javax.swing.JPasswordField();
+        Name = new javax.swing.JLabel();
+        adminName = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(846, 463));
 
@@ -62,11 +66,13 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("FullName");
+        jLabel1.setText("Lastname");
 
         jLabel2.setText("ID");
 
         jLabel3.setText("Password");
+
+        Name.setText("Name");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,6 +81,8 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(146, 146, 146)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Name)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
@@ -84,17 +92,21 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(adminPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(nameUser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                        .addComponent(adminLastname, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                         .addComponent(adminId, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(86, 86, 86)
+                .addGap(30, 30, 30)
+                .addComponent(Name)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nameUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(adminLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -105,9 +117,9 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
                 .addComponent(adminPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(111, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,12 +127,12 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            ResultSet result = controller.getUserById(adminId.getText());
+            ResultSet result = userController.getUserById(adminId.getText());
             if (result.next()) {
                 JOptionPane.showMessageDialog(null, "This User ID already exists");
                 return;
             }
-            controller.addUser(adminId.getText(), nameUser.getText(), adminPassword.getText());
+            controller.addAdmin(adminId.getText(), adminName.getText(), adminLastname.getText(), String.valueOf(adminPassword.getPassword()));
             JOptionPane.showMessageDialog(null, "The User has been registered succesfully");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Couldn't add new User: " + ex);
@@ -134,13 +146,15 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Name;
     private javax.swing.JTextField adminId;
+    private javax.swing.JTextField adminLastname;
+    private javax.swing.JTextField adminName;
     private javax.swing.JPasswordField adminPassword;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField nameUser;
     // End of variables declaration//GEN-END:variables
 }

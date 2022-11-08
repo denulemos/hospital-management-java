@@ -21,27 +21,22 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="132" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="addPatientId" max="32767" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="addPatientName" max="32767" attributes="0"/>
-                      <Component id="addPatientSubmit" alignment="0" pref="240" max="32767" attributes="0"/>
-                      <Component id="addPatientCancel" alignment="0" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="patientId" max="32767" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="patientName" max="32767" attributes="0"/>
+                  <Component id="addPatientSubmit" alignment="0" pref="240" max="32767" attributes="0"/>
+                  <Component id="addPatientCancel" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="radioMan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="radioFemale" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="patientBirthday" min="-2" pref="122" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="patientLastname" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="649" max="32767" attributes="0"/>
           </Group>
@@ -53,22 +48,21 @@
               <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="addPatientId" min="-2" max="-2" attributes="0"/>
+              <Component id="patientId" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-              <Component id="addPatientName" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="patientName" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Component id="patientLastname" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="18" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="radioMan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="radioFemale" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="patientBirthday" alignment="1" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
@@ -82,11 +76,11 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="addPatientName">
+    <Component class="javax.swing.JTextField" name="patientName">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="FullName"/>
+        <Property name="text" type="java.lang.String" value="Name"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="addPatientSubmit">
@@ -118,7 +112,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="addPatientHistory">
+        <Component class="javax.swing.JTextArea" name="patientHistory">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
@@ -131,7 +125,7 @@
         <Property name="text" type="java.lang.String" value="Medic History"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="addPatientId">
+    <Component class="javax.swing.JTextField" name="patientId">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -148,11 +142,11 @@
         <Property name="text" type="java.lang.String" value="Female"/>
       </Properties>
     </Component>
-    <Component class="com.toedter.calendar.JDateChooser" name="patientBirthday">
+    <Component class="javax.swing.JTextField" name="patientLastname">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
+    <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Select Birthday"/>
+        <Property name="text" type="java.lang.String" value="Lastname"/>
       </Properties>
     </Component>
   </SubComponents>

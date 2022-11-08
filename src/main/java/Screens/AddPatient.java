@@ -42,34 +42,26 @@ public class AddPatient extends javax.swing.JInternalFrame {
         
     };
     
-    private String getBirthday () {
-        int year = patientBirthday.getCalendar().get(Calendar.YEAR);
-        int month = patientBirthday.getCalendar().get(Calendar.MONTH);
-        int day = patientBirthday.getCalendar().get(Calendar.DAY_OF_MONTH);
-        
-        String birthday = year+"-"+month+"-"+day;
-        return birthday;
-    };
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        addPatientName = new javax.swing.JTextField();
+        patientName = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         addPatientSubmit = new javax.swing.JButton();
         addPatientCancel = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        addPatientHistory = new javax.swing.JTextArea();
+        patientHistory = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
-        addPatientId = new javax.swing.JTextField();
+        patientId = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         radioMan = new javax.swing.JRadioButton();
         radioFemale = new javax.swing.JRadioButton();
-        patientBirthday = new com.toedter.calendar.JDateChooser();
-        jLabel5 = new javax.swing.JLabel();
+        patientLastname = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
 
-        jLabel1.setText("FullName");
+        jLabel1.setText("Name");
 
         addPatientSubmit.setBackground(new java.awt.Color(0, 153, 51));
         addPatientSubmit.setText("Add");
@@ -87,9 +79,9 @@ public class AddPatient extends javax.swing.JInternalFrame {
             }
         });
 
-        addPatientHistory.setColumns(20);
-        addPatientHistory.setRows(5);
-        jScrollPane1.setViewportView(addPatientHistory);
+        patientHistory.setColumns(20);
+        patientHistory.setRows(5);
+        jScrollPane1.setViewportView(patientHistory);
 
         jLabel2.setText("Medic History");
 
@@ -99,7 +91,7 @@ public class AddPatient extends javax.swing.JInternalFrame {
 
         radioFemale.setText("Female");
 
-        jLabel5.setText("Select Birthday");
+        jLabel3.setText("Lastname");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,24 +99,21 @@ public class AddPatient extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(132, 132, 132)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(addPatientId)
-                        .addComponent(jLabel2)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(addPatientName)
-                        .addComponent(addPatientSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                        .addComponent(addPatientCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(patientId)
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(patientName)
+                    .addComponent(addPatientSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                    .addComponent(addPatientCancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(radioMan)
                         .addGap(32, 32, 32)
                         .addComponent(radioFemale))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(patientBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)))
+                    .addComponent(patientLastname))
                 .addContainerGap(649, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -133,20 +122,20 @@ public class AddPatient extends javax.swing.JInternalFrame {
                 .addGap(60, 60, 60)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(patientId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(4, 4, 4)
-                .addComponent(addPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(patientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addGap(4, 4, 4)
+                .addComponent(patientLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(radioMan)
                     .addComponent(radioFemale))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(patientBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,10 +151,9 @@ public class AddPatient extends javax.swing.JInternalFrame {
 
     private void addPatientSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addPatientSubmitActionPerformed
         String gender = setGender();
-        String birthday = getBirthday();
         
         try {
-            controller.addPatient(addPatientId.getText(), addPatientName.getText(), birthday, addPatientHistory.getText(), gender);
+            controller.addPatient(patientId.getText(), patientName.getText(), patientLastname.getText(), patientHistory.getText(), gender);
             JOptionPane.showMessageDialog(null, "The patient has been registered succesfully");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Couldn't add new Patient: " + ex);
@@ -181,16 +169,16 @@ public class AddPatient extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addPatientCancel;
-    private javax.swing.JTextArea addPatientHistory;
-    private javax.swing.JTextField addPatientId;
-    private javax.swing.JTextField addPatientName;
     private javax.swing.JButton addPatientSubmit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.toedter.calendar.JDateChooser patientBirthday;
+    private javax.swing.JTextArea patientHistory;
+    private javax.swing.JTextField patientId;
+    private javax.swing.JTextField patientLastname;
+    private javax.swing.JTextField patientName;
     private javax.swing.JRadioButton radioFemale;
     private javax.swing.JRadioButton radioMan;
     // End of variables declaration//GEN-END:variables
