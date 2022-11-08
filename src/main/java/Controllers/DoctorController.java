@@ -15,8 +15,8 @@ import java.sql.Statement;
  * @author Denu
  */
 public class DoctorController {
-    
-     public ResultSet getAllDoctors (Connection connection) throws SQLException {
+    Connection connection = ConnectionProvider.getConnection();
+     public ResultSet getAllDoctors () throws SQLException {
         Statement statement = connection.createStatement();
          ResultSet result;
         
@@ -31,7 +31,7 @@ public class DoctorController {
     }
     
      
-      public ResultSet getDoctorBySpecialty (String specialty, Connection connection) throws SQLException {
+      public ResultSet getDoctorBySpecialty (String specialty) throws SQLException {
         Statement statement = connection.createStatement();
          ResultSet result;
         
@@ -39,4 +39,34 @@ public class DoctorController {
         
         return result;
     }
+
+    public ResultSet getDoctorById (String id) throws SQLException {
+        Statement statement = connection.createStatement();
+         ResultSet result;
+        
+         result = statement.executeQuery("SELECT * FROM users WHERE id LIKE '" + id +"%'");
+        
+        return result;
+    }
+
+     public ResultSet getDoctorByName (String name, String lastname) throws SQLException {
+        Statement statement = connection.createStatement();
+         ResultSet result;
+        
+        if (name.isEmpty() && !lastname.isEmpty()) {
+          result = statement.executeQuery("SELECT * FROM users WHERE lastname LIKE '" + lastname +"%'");
+          return result;
+        
+        }
+         
+         if (!name.isEmpty() && lastname.isEmpty()){
+          result = statement.executeQuery("SELECT * FROM users WHERE name LIKE '" + name +"%'");
+          return result;
+         }
+        
+         result = statement.executeQuery("SELECT * FROM users WHERE lastname LIKE '" + lastname +"%' AND name LIKE '" + name +"%'");
+          return result;
+        
+    }
+
 }

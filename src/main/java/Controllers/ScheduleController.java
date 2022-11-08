@@ -15,7 +15,10 @@ import java.util.Date;
  * @author Denu
  */
 public class ScheduleController {
-     public ResultSet getAvailableScheduleBySpecialty (String specialty, Connection connection) throws SQLException {
+
+  Connection connection = ConnectionProvider.getConnection();
+
+     public ResultSet getAvailableScheduleBySpecialty (String specialty) throws SQLException {
         Statement statement = connection.createStatement();
          ResultSet result;
         
@@ -24,7 +27,7 @@ public class ScheduleController {
         return result;
     }
      
-     public ResultSet getScheduleByDoctor (String doctor, Connection connection) throws SQLException {
+     public ResultSet getScheduleByDoctor (String doctor) throws SQLException {
         Statement statement = connection.createStatement();
          ResultSet result;
         
@@ -33,7 +36,7 @@ public class ScheduleController {
         return result;
     }
      
-          public ResultSet getFreeScheduleByDoctor (String doctor, Connection connection) throws SQLException {
+          public ResultSet getFreeScheduleByDoctor (String doctor) throws SQLException {
         Statement statement = connection.createStatement();
          ResultSet result;
         
@@ -42,7 +45,7 @@ public class ScheduleController {
         return result;
     }
      
-      public ResultSet getScheduleByDoctorByDates (String doctor, Date startDate, Date endDate, Connection connection) throws SQLException {
+      public ResultSet getScheduleByDoctorByDates (String doctor, Date startDate, Date endDate) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet result;
         
@@ -51,7 +54,7 @@ public class ScheduleController {
         return result;
     }
      
-     public ResultSet takeSchedule (String id, Connection connection) throws SQLException {
+     public ResultSet takeSchedule (String id) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet result;
         
@@ -60,7 +63,7 @@ public class ScheduleController {
         return result;
     }
      
-      public ResultSet createSchedule (String doctor, String date, Connection connection) throws SQLException {
+      public ResultSet createSchedule (String doctor, String date) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet result;
         
@@ -69,7 +72,7 @@ public class ScheduleController {
         return result;
     }
      
-     public ResultSet getScheduleByPatient (String patient, Connection connection) throws SQLException {
+     public ResultSet getScheduleByPatient (String patient) throws SQLException {
         Statement statement = connection.createStatement();
          ResultSet result;
         

@@ -41,3 +41,9 @@ CREATE TABLE `schedule` (
 
 
 ```
+
+## Functionality
+
+* There's 2 types of Users, the Doctor and the Administrator
+* The administrator can add Doctors, add other Administrators, add Patients, Generate Reports, manage the schedule for the patients and check data
+* The Doctor can edit a patient, administrate his/her schedule and generate reports
