@@ -86,6 +86,11 @@ public class AttendPatient extends javax.swing.JInternalFrame {
                 "Name", "Lastname", "ID "
             }
         ));
+        resultTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                resultTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(resultTable);
 
         historyPatient.setColumns(20);
@@ -262,6 +267,10 @@ public class AttendPatient extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void resultTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_resultTableMouseClicked
+        
+    }//GEN-LAST:event_resultTableMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

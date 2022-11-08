@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 /**
  *
@@ -27,7 +28,43 @@ public class ScheduleController {
         Statement statement = connection.createStatement();
          ResultSet result;
         
+         result = statement.executeQuery("SELECT * FROM schedule WHERE doctor LIKE '" + doctor +"%");
+        
+        return result;
+    }
+     
+          public ResultSet getFreeScheduleByDoctor (String doctor, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+         ResultSet result;
+        
          result = statement.executeQuery("SELECT * FROM schedule WHERE doctor LIKE '" + doctor +"%' AND patient IS NULL");
+        
+        return result;
+    }
+     
+      public ResultSet getScheduleByDoctorByDates (String doctor, Date startDate, Date endDate, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet result;
+        
+        result = statement.executeQuery("SELECT * FROM schedule WHERE doctor LIKE '" + doctor + "%' AND date BETWEEN '"+ startDate +"' and '"+ endDate +"'");
+        
+        return result;
+    }
+     
+     public ResultSet takeSchedule (String id, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet result;
+        
+         result = statement.executeQuery("INSERT INTO schedule (`taken`) VALUES (1) WHERE id = " + id);
+        
+        return result;
+    }
+     
+      public ResultSet createSchedule (String doctor, String date, Connection connection) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet result;
+        
+         result = statement.executeQuery("INSERT INTO schedule (`doctor`, `date`) VALUES ("+ doctor + "," + date + ");");
         
         return result;
     }
