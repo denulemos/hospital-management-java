@@ -70,7 +70,8 @@ public class AttendPatient extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Patient ID");
 
-        jButton1.setBackground(new java.awt.Color(0, 153, 51));
+        jButton1.setBackground(new java.awt.Color(0, 153, 153));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Search");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,6 +101,7 @@ public class AttendPatient extends javax.swing.JInternalFrame {
         jLabel2.setText("History");
 
         jButton2.setBackground(new java.awt.Color(0, 153, 153));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Save Changes");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,7 +109,8 @@ public class AttendPatient extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(204, 0, 0));
+        jButton3.setBackground(new java.awt.Color(153, 153, 153));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Cancel");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

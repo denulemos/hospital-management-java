@@ -32,6 +32,8 @@ public class main extends javax.swing.JFrame {
         doctorMain = new DoctorMain();
         adminMain = new AdminMain();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -56,8 +58,9 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        loginButton.setBackground(new java.awt.Color(0, 153, 102));
         loginButton.setText("Login");
+        loginButton.setBackground(new java.awt.Color(0, 153, 153));
+        loginButton.setForeground(new java.awt.Color(255, 255, 255));
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
@@ -80,7 +83,7 @@ public class main extends javax.swing.JFrame {
                     .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                     .addComponent(idField)
                     .addComponent(passwordField))
-                .addContainerGap(459, Short.MAX_VALUE))
+                .addContainerGap(187, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

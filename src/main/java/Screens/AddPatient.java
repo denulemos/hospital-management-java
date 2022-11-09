@@ -63,7 +63,8 @@ public class AddPatient extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Name");
 
-        addPatientSubmit.setBackground(new java.awt.Color(0, 153, 51));
+        addPatientSubmit.setBackground(new java.awt.Color(0, 153, 153));
+        addPatientSubmit.setForeground(new java.awt.Color(255, 255, 255));
         addPatientSubmit.setText("Add");
         addPatientSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -71,7 +72,8 @@ public class AddPatient extends javax.swing.JInternalFrame {
             }
         });
 
-        addPatientCancel.setBackground(new java.awt.Color(153, 0, 0));
+        addPatientCancel.setBackground(new java.awt.Color(153, 153, 153));
+        addPatientCancel.setForeground(new java.awt.Color(255, 255, 255));
         addPatientCancel.setText("Cancel");
         addPatientCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +116,7 @@ public class AddPatient extends javax.swing.JInternalFrame {
                         .addGap(32, 32, 32)
                         .addComponent(radioFemale))
                     .addComponent(patientLastname))
-                .addContainerGap(649, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

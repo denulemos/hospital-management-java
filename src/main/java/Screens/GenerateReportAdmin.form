@@ -30,31 +30,29 @@
           </Group>
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane2" pref="876" max="32767" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="405" max="32767" attributes="0"/>
-                      <Component id="jButton2" min="-2" pref="136" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="341" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+              <Component id="jScrollPane2" pref="876" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-              <Component id="dateTimePicker1" min="-2" max="-2" attributes="0"/>
+              <Component id="fromDate" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
-              <Component id="jTextField1" pref="253" max="32767" attributes="0"/>
+              <Component id="doctorField" pref="253" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Component id="dateTimePicker2" min="-2" max="-2" attributes="0"/>
+              <Component id="toDate" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jButton1" min="-2" pref="136" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="370" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="amountGain" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="jButton2" min="-2" pref="136" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="361" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -69,16 +67,19 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="dateTimePicker1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="dateTimePicker2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="doctorField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="fromDate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="toDate" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="141" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton2" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jButton2" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="amountGain" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="37" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -92,11 +93,14 @@
           <Color blue="cc" green="cc" red="0" type="rgb"/>
         </Property>
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="0" type="rgb"/>
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextField1">
+    <Component class="javax.swing.JTextField" name="doctorField">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
       <Properties>
@@ -107,7 +111,10 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="0" green="0" red="cc" type="rgb"/>
+          <Color blue="99" green="99" red="99" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
       </Properties>
       <Events>
@@ -126,9 +133,9 @@
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="0">
                 <Column editable="false" title="ID" type="java.lang.Object"/>
-                <Column editable="false" title="Date" type="java.lang.Object"/>
-                <Column editable="false" title="Patient" type="java.lang.Object"/>
                 <Column editable="false" title="Doctor" type="java.lang.Object"/>
+                <Column editable="false" title="Patient" type="java.lang.Object"/>
+                <Column editable="false" title="Date" type="java.lang.Object"/>
                 <Column editable="false" title="Taken" type="java.lang.Object"/>
                 <Column editable="false" title="Price" type="java.lang.Object"/>
               </Table>
@@ -137,9 +144,9 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="dateTimePicker1">
+    <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="fromDate">
     </Component>
-    <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="dateTimePicker2">
+    <Component class="com.github.lgooddatepicker.components.DateTimePicker" name="toDate">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
@@ -150,6 +157,8 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="To"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="amountGain">
     </Component>
   </SubComponents>
 </Form>

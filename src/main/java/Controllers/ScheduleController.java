@@ -4,11 +4,12 @@
  */
 package Controllers;
 
+import Provider.ConnectionProvider;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -31,7 +32,7 @@ public class ScheduleController {
         Statement statement = connection.createStatement();
          ResultSet result;
         
-         result = statement.executeQuery("SELECT * FROM schedule WHERE doctor LIKE '" + doctor +"%");
+         result = statement.executeQuery("SELECT * FROM schedule WHERE doctor LIKE '" + doctor +"%'");
         
         return result;
     }
@@ -45,7 +46,7 @@ public class ScheduleController {
         return result;
     }
      
-      public ResultSet getScheduleByDoctorByDates (String doctor, Date startDate, Date endDate) throws SQLException {
+      public ResultSet getScheduleByDoctorByDates (String doctor, LocalDateTime startDate, LocalDateTime endDate) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet result;
         
@@ -63,13 +64,11 @@ public class ScheduleController {
         return result;
     }
      
-      public ResultSet createSchedule (String doctor, String date) throws SQLException {
+      public void createSchedule (String doctor, LocalDateTime date, int price) throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet result;
         
-         result = statement.executeQuery("INSERT INTO schedule (`doctor`, `date`) VALUES ("+ doctor + "," + date + ");");
-        
-        return result;
+        statement.executeUpdate("INSERT INTO schedule (`doctor`, `date`, `price`) VALUES ('" + doctor + "','" + date + "', "+price+");");
+
     }
      
      public ResultSet getScheduleByPatient (String patient) throws SQLException {
@@ -77,6 +76,20 @@ public class ScheduleController {
          ResultSet result;
         
          result = statement.executeQuery("SELECT * FROM schedule WHERE patient LIKE '" + patient +"%'");
+        
+        return result;
+    }
+     
+      public void updateSchedule (String id, String patient, int price, String taken) throws SQLException {
+        Statement statement = connection.createStatement();
+        statement.executeUpdate("UPDATE `schedule` SET `patient` =" + patient + ", TAKEN = " + taken + ", PRICE = " +price+ " WHERE (`id` = "+id+");");
+    }
+     
+         public ResultSet getScheduleByDateandDoctor (LocalDateTime date, String doctor) throws SQLException {
+        Statement statement = connection.createStatement();
+         ResultSet result;
+        
+         result = statement.executeQuery("SELECT * FROM schedule WHERE date = '" + date +"%' and doctor = '" + doctor + "'");
         
         return result;
     }

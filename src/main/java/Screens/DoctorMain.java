@@ -70,7 +70,7 @@ public class DoctorMain extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem3.setText("Add Option");
+        jMenuItem3.setText("Add Appointment");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
@@ -78,7 +78,7 @@ public class DoctorMain extends javax.swing.JFrame {
         });
         ScheduleMenu.add(jMenuItem3);
 
-        jMenuItem6.setText("See Schedule");
+        jMenuItem6.setText("Check Schedule");
         ScheduleMenu.add(jMenuItem6);
 
         jMenuBar1.add(ScheduleMenu);
@@ -97,7 +97,7 @@ public class DoctorMain extends javax.swing.JFrame {
 
         jMenu3.setText("Patient");
 
-        jMenuItem5.setText("Attend");
+        jMenuItem5.setText("Attend Patient");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);

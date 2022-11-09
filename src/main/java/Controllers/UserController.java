@@ -2,7 +2,6 @@ package Controllers;
 
 import Models.UserModel;
 import Provider.ConnectionProvider;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
