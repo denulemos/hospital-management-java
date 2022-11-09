@@ -4,6 +4,7 @@
  */
 package Screens;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +25,7 @@ public class AdminMain extends javax.swing.JFrame {
      */
     public AdminMain() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         scheduleAdmin = new ScheduleAdmin();
         generateReportAdmin = new GenerateReportAdmin();
         addPatient = new AddPatient();

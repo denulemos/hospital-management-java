@@ -54,6 +54,15 @@ public class ScheduleController {
         
         return result;
     }
+      
+      public ResultSet getScheduleByDoctorSingleDate (LocalDateTime date) throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet result;
+        
+        result = statement.executeQuery("SELECT * FROM schedule WHERE date = '"+ date +"'");
+        
+        return result;
+    }
      
      public ResultSet takeSchedule (String id) throws SQLException {
         Statement statement = connection.createStatement();
@@ -64,10 +73,10 @@ public class ScheduleController {
         return result;
     }
      
-      public void createSchedule (String doctor, LocalDateTime date, int price) throws SQLException {
+      public void createSchedule (String doctor, LocalDateTime date, int price, String specialty) throws SQLException {
         Statement statement = connection.createStatement();
         
-        statement.executeUpdate("INSERT INTO schedule (`doctor`, `date`, `price`) VALUES ('" + doctor + "','" + date + "', "+price+");");
+        statement.executeUpdate("INSERT INTO schedule (`doctor`, `date`, `price`, `specialty`) VALUES ('" + doctor + "','" + date + "', "+price+", '"+specialty+"');");
 
     }
      

@@ -5,6 +5,7 @@
 package Screens;
 
 import Controllers.PatientController;
+import Models.PatientModel;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -214,9 +215,11 @@ public class AttendPatient extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "At least one field should be filled");
             return;
         }
+       
+       PatientModel user = new PatientModel(patientId.getText(), patientLastname.getText(), patientName.getText(), null, null);
         
         try {
-            ResultSet result =controller.searchPatient(patientId.getText(), patientName.getText(), patientLastname.getText());
+            ResultSet result =controller.searchPatient(user.getId(), user.getName(), user.getLastname());
             if (result.next()) {
                 DefaultTableModel model = (DefaultTableModel)resultTable.getModel();
                 do {
@@ -239,13 +242,11 @@ public class AttendPatient extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        String history = historyPatient.getText();
-        String name = (String)resultTable.getModel().getValueAt(0,0);
-        String lastname = (String)resultTable.getModel().getValueAt(0,1);
-        String id = (String)resultTable.getModel().getValueAt(0,2);
+        
+        PatientModel user = new PatientModel((String)resultTable.getModel().getValueAt(0,2), (String)resultTable.getModel().getValueAt(0,1), (String)resultTable.getModel().getValueAt(0,0), historyPatient.getText(), null);
         
         try {
-            controller.editPatient(id, name, lastname, history);
+            controller.editPatient(user.getId(), user.getName(), user.getLastname(), user.getHistory());
             JOptionPane.showMessageDialog(null, "Patient updated");
         }
         

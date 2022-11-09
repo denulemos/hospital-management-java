@@ -5,7 +5,6 @@
 package Screens;
 
 import Controllers.ScheduleController;
-import Controllers.UserController;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;

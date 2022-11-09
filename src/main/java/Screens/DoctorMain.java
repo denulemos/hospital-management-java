@@ -4,6 +4,7 @@
  */
 package Screens;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,6 +22,7 @@ public class DoctorMain extends javax.swing.JFrame {
      */
     public DoctorMain() {
         initComponents();
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
         scheduleDoctor = new ScheduleDoctor();
         generateReportDoctor = new GenerateReportDoctor();
         attendPatient = new AttendPatient();

@@ -203,6 +203,7 @@ public class ScheduleDoctor extends javax.swing.JInternalFrame {
            return;
        }
        String doctor = UserController.currentUser.getId();
+       String specialty = UserController.currentUser.getSpecialty();
        int price = UserController.currentUser.getPrice();
        try {
           ResultSet result = schedController.getScheduleByDateandDoctor(time, doctor);
@@ -211,7 +212,7 @@ public class ScheduleDoctor extends javax.swing.JInternalFrame {
               return;
           }
            
-           schedController.createSchedule(doctor, time, price);
+           schedController.createSchedule(doctor, time, price, specialty);
            JOptionPane.showMessageDialog(null, "Appointment created");
            refreshData();
        }
