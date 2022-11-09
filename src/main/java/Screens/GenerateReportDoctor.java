@@ -44,6 +44,7 @@ public class GenerateReportDoctor extends javax.swing.JInternalFrame {
         TotalAmount = new javax.swing.JLabel();
         fromDate = new com.github.lgooddatepicker.components.DateTimePicker();
         toDate = new com.github.lgooddatepicker.components.DateTimePicker();
+        amountGain = new javax.swing.JLabel();
 
         jLabel1.setText("From");
 
@@ -101,11 +102,13 @@ public class GenerateReportDoctor extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2)
                         .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(TotalAmount)
-                        .addGap(928, 928, 928))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(amountGain)
+                            .addComponent(TotalAmount))
+                        .addGap(891, 891, 891))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addComponent(fromDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,10 +138,12 @@ public class GenerateReportDoctor extends javax.swing.JInternalFrame {
                     .addComponent(jButton2)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(amountGain)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TotalAmount)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel3)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -154,22 +159,27 @@ public class GenerateReportDoctor extends javax.swing.JInternalFrame {
        LocalDateTime from = fromDate.getDateTimePermissive();
        LocalDateTime to = toDate.getDateTimePermissive();
        
-       if (from == null || from.getHour() == 0 || to == null || to.getHour() == 0) {
+       if (from == null || to == null ) {
            JOptionPane.showMessageDialog(null, "All fields must be filled");
            return;
        }
        
        String doctor = UserController.currentUser.getId();
         try {
+            int amount = 0;
             DefaultTableModel model = (DefaultTableModel)resultTable.getModel();
             model.setRowCount(0);
             ResultSet results = schedController.getScheduleByDoctorByDates(doctor, from, to);
          if (results.next()){
             do {
-               String [] row = {results.getString(1), results.getString(3), results.getString(4), results.getString(5), results.getString(5)};
+                if (results.getString(5).equals("1")){
+                    amount += results.getInt(6);
+                }
+               String [] row = {results.getString(1), results.getString(3), results.getString(4), results.getString(5), results.getString(6)};
                model.addRow(row);
             }while(results.next());
             }
+         amountGain.setText("Total = " + Integer.toString(amount) + "$");
         }
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, "There was an error trying to get the appointments");
@@ -180,6 +190,7 @@ public class GenerateReportDoctor extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TotalAmount;
+    private javax.swing.JLabel amountGain;
     private com.github.lgooddatepicker.components.DateTimePicker fromDate;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
