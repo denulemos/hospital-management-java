@@ -9,6 +9,8 @@ import Screens.AdminMain;
 import Controllers.UserController;
 import Models.UserModel;
 import Provider.ConnectionProvider;
+import Validators.FieldValidator;
+import Validators.UserValidator;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
@@ -49,6 +51,7 @@ public class main extends javax.swing.JFrame {
         loginButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,9 +61,9 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        loginButton.setText("Login");
         loginButton.setBackground(new java.awt.Color(0, 153, 153));
         loginButton.setForeground(new java.awt.Color(255, 255, 255));
+        loginButton.setText("Login");
         loginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loginButtonActionPerformed(evt);
@@ -71,24 +74,34 @@ public class main extends javax.swing.JFrame {
 
         jLabel2.setText("Password");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setText("Medical Administration System");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(181, 181, 181)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                    .addComponent(idField)
-                    .addComponent(passwordField))
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(169, 169, 169)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(idField)
+                            .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(157, 157, 157)
+                .addGap(52, 52, 52)
+                .addComponent(jLabel7)
+                .addGap(68, 68, 68)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,7 +111,7 @@ public class main extends javax.swing.JFrame {
                 .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addComponent(loginButton)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
 
         pack();
@@ -111,24 +124,22 @@ public class main extends javax.swing.JFrame {
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         String id = idField.getText();
         String password = passwordField.getText();
-        
-        if (id.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "All fields must be filled");
-        }
-        else {
+          
             try {
+                FieldValidator.validateField(id);
+                FieldValidator.validateField(password);
                 UserController userController = new UserController();
                 ResultSet result = userController.loginUser(id, password);
                 if (result.next()){
                     UserModel user;
                          user = UserController.setGlobalUser(result.getString(2), result.getString(3), result.getString(1), result.getString(5), Integer.parseInt(result.getString(6)));  
                      
-                     if (user.getSpecialty() == null){
-                         adminMain.setVisible(true);
+                     if (UserValidator.isDoctor(user)){
+                         doctorMain.setVisible(true);
                          new main().setVisible(false);
                      }
                      else {
-                         doctorMain.setVisible(true);
+                         adminMain.setVisible(true);
                          new main().setVisible(false);
                      }
                      JOptionPane.showMessageDialog(null, "Welcome " + user.getName() +" "+ user.getLastname() + "!");
@@ -139,11 +150,12 @@ public class main extends javax.swing.JFrame {
                
             }
             catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
             }
            
            
-        }
+    
     }//GEN-LAST:event_loginButtonActionPerformed
 
     /**
@@ -185,6 +197,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JTextField idField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
     // End of variables declaration//GEN-END:variables

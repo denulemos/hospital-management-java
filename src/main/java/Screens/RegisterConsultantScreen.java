@@ -6,6 +6,9 @@ package Screens;
 
 import Controllers.AdministratorController;
 import Controllers.UserController;
+import Validators.FieldValidator;
+import Validators.UserValidator;
+import exceptions.EmptyFieldException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashSet;
@@ -27,6 +30,13 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
     public RegisterConsultantScreen() {
         initComponents();
     }
+    
+    private void validateFields () throws EmptyFieldException {
+        FieldValidator.validateField(adminId.getText());
+        FieldValidator.validateField(adminName.getText());
+        FieldValidator.validateField(adminLastname.getText());
+        FieldValidator.validateField(String.valueOf(adminPassword.getPassword()));
+    };
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,21 +57,22 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
         adminPassword = new javax.swing.JPasswordField();
         Name = new javax.swing.JLabel();
         adminName = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(846, 463));
 
-        jButton1.setText("Submit");
         jButton1.setBackground(new java.awt.Color(0, 204, 204));
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Cancel");
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Cancel");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -76,29 +87,39 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
 
         Name.setText("Name");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel4.setText("Register new Administrator");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(adminName, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                    .addComponent(Name)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(adminPassword)
-                    .addComponent(adminLastname, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                    .addComponent(adminId)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(131, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(96, 96, 96)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(119, 119, 119)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(adminName)
+                            .addComponent(Name)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(adminPassword)
+                            .addComponent(adminLastname)
+                            .addComponent(adminId)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(29, 29, 29)
                 .addComponent(Name)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(adminName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,7 +139,7 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
 
         pack();
@@ -126,15 +147,16 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         try {
-            ResultSet result = userController.getUserById(adminId.getText());
-            if (result.next()) {
-                JOptionPane.showMessageDialog(null, "This User ID already exists");
-                return;
-            }
+            validateFields();
+            UserValidator.userExists(adminId.getText());
             controller.addAdmin(adminId.getText(), adminName.getText(), adminLastname.getText(), String.valueOf(adminPassword.getPassword()));
             JOptionPane.showMessageDialog(null, "The User has been registered succesfully");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Couldn't add new User: " + ex);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -155,5 +177,6 @@ public class RegisterConsultantScreen extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }

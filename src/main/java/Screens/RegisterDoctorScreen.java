@@ -6,6 +6,10 @@ package Screens;
 
 import Controllers.DoctorController;
 import Controllers.UserController;
+import Models.UserModel;
+import Validators.FieldValidator;
+import Validators.UserValidator;
+import exceptions.EmptyFieldException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -51,6 +55,7 @@ public class RegisterDoctorScreen extends javax.swing.JInternalFrame {
         price = new javax.swing.JTextField();
         doctorPrice = new javax.swing.JLabel();
         $ = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setText("Name");
 
@@ -84,6 +89,9 @@ public class RegisterDoctorScreen extends javax.swing.JInternalFrame {
 
         $.setText("$");
 
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel6.setText("Register Doctor");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,31 +103,35 @@ public class RegisterDoctorScreen extends javax.swing.JInternalFrame {
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(doctorPrice)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
-                            .addComponent(doctorName2, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(doctorPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(doctorSpecialty, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(doctorId, javax.swing.GroupLayout.Alignment.LEADING))
-                            .addComponent(doctorLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(doctorName2, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(doctorPassword)
+                            .addComponent(doctorSpecialty, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                            .addComponent(jLabel3)
+                            .addComponent(doctorId)
+                            .addComponent(doctorLastname, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent($))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)))
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(0, 115, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(166, 166, 166))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(doctorName2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,18 +167,29 @@ public class RegisterDoctorScreen extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void validateFields () throws EmptyFieldException {
+        FieldValidator.validateField(doctorName2.getText());
+            FieldValidator.validateField(doctorLastname.getText());
+            FieldValidator.validateField(doctorId.getText());
+            FieldValidator.validateField(doctorSpecialty.getText());
+            FieldValidator.validateField(String.valueOf(doctorPassword.getPassword()));
+    };
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         try {
-            ResultSet result = userController.getUserById(doctorId.getText());
-            if (result.next()) {
-                JOptionPane.showMessageDialog(null, "This Doctor already exists");
-                return;
-            }
-            doctorController.addDoctor(doctorId.getText(), doctorName2.getText(), doctorLastname.getText(),  String.valueOf(doctorPassword.getPassword()), doctorSpecialty.getText(),  Integer.parseInt(price.getText()));
+            validateFields();
+            UserValidator.userExists(doctorId.getText());
+            int priceDoctor = FieldValidator.validateAndConvertToNumber(price.getText());
+            UserModel doctor = new UserModel(doctorName2.getText(), doctorLastname.getText(),doctorId.getText(), doctorSpecialty.getText(), priceDoctor, String.valueOf(doctorPassword.getPassword()) );
+            doctorController.addDoctor(doctor.getId(), doctor.getName(), doctor.getLastname(),  doctor.getPassword(), doctor.getSpecialty(),  doctor.getPrice());
             JOptionPane.showMessageDialog(null, "The Doctor has been registered succesfully");
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Couldn't add new Doctor: " + ex);
+            JOptionPane.showMessageDialog(null, "Couldn't add new Doctor: " + ex, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -190,6 +213,7 @@ public class RegisterDoctorScreen extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField price;
     // End of variables declaration//GEN-END:variables
 }

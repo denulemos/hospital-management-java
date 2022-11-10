@@ -6,8 +6,10 @@ package Screens;
 
 import Controllers.DoctorController;
 import Controllers.ScheduleController;
+import Validators.FieldValidator;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -176,26 +178,23 @@ public class ScheduleAdmin extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        DefaultTableModel model = (DefaultTableModel)resultTable.getModel();
-        if (patientId.getText().isEmpty()){
-            // TODO ERROR
-            return;
-        }
-        
+        DefaultTableModel model = (DefaultTableModel)resultTable.getModel();        
         try {
+            FieldValidator.validateField(patientId.getText());
             model.setRowCount(0);
              ResultSet results = scheduleController.getScheduleByPatient(patientId.getText());
               if (results.next()){
             do {
                 
-                     String [] row = {results.getString(1), results.getString(2),  results.getString(3), results.getString(4), results.getString(5), results.getString(6), results.getString(7)};
+               String [] row = {results.getString(1), results.getString(2),  results.getString(3), results.getString(4), results.getString(5), results.getString(6), results.getString(7)};
                model.addRow(row);
                 
             }while(results.next());
             }
         }
         catch (Exception e) {
-            // TODO CARTEL
+             JOptionPane.showMessageDialog(null, e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
         }
        
         

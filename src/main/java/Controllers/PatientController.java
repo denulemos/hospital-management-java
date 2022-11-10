@@ -54,6 +54,7 @@ public class PatientController {
         return result;
     }
      
+     
      public ResultSet fullSearch (String id, String name, String lastname) throws SQLException {
         Statement statement = ConnectionProvider.getConnection().createStatement();
         ResultSet result;

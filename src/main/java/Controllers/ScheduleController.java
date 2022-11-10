@@ -55,6 +55,7 @@ public class ScheduleController {
         return result;
     }
       
+      
       public ResultSet getScheduleByDoctorSingleDate (LocalDateTime date) throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet result;
@@ -91,7 +92,7 @@ public class ScheduleController {
      
       public void updateSchedule (String id, String patient, int price, String taken) throws SQLException {
         Statement statement = connection.createStatement();
-        statement.executeUpdate("UPDATE `schedule` SET `patient` =" + patient + ", TAKEN = " + taken + ", PRICE = " +price+ " WHERE (`id` = "+id+");");
+        statement.executeUpdate("UPDATE `schedule` SET `patient` =" + patient + ", TAKEN = '" + taken + "', PRICE = " +price+ " WHERE (`id` = "+id+");");
     }
      
          public ResultSet getScheduleByDateandDoctor (LocalDateTime date, String doctor) throws SQLException {

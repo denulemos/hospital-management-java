@@ -6,6 +6,7 @@ package Screens;
 
 import Controllers.PatientController;
 import Models.PatientModel;
+import Validators.FieldValidator;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -52,6 +53,7 @@ public class AttendPatient extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         patientLastname = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         jLabel3.setText("jLabel3");
 
@@ -87,7 +89,15 @@ public class AttendPatient extends javax.swing.JInternalFrame {
             new String [] {
                 "Name", "Lastname", "ID "
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         resultTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 resultTableMouseClicked(evt);
@@ -135,6 +145,9 @@ public class AttendPatient extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Patient Lastname");
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel7.setText("Patient");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,15 +155,6 @@ public class AttendPatient extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(106, 106, 106)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(patientName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(40, 40, 40)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(patientLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
@@ -168,12 +172,26 @@ public class AttendPatient extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(27, Short.MAX_VALUE))))
+                        .addContainerGap(27, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(patientName, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(40, 40, 40)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(patientLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addGap(34, 34, 34)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(patientId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -211,22 +229,19 @@ public class AttendPatient extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_patientIdActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       if (patientId.getText().isEmpty() && patientName.getText().isEmpty() && patientLastname.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "At least one field should be filled");
-            return;
-        }
-       
-       PatientModel user = new PatientModel(patientId.getText(), patientLastname.getText(), patientName.getText(), null, null);
         
         try {
+            FieldValidator.validateField(patientId.getText());
+            FieldValidator.validateField(patientName.getText());
+            FieldValidator.validateField(patientLastname.getText());
+            PatientModel user = new PatientModel(patientId.getText(), patientLastname.getText(), patientName.getText(), null, null);
             ResultSet result =controller.searchPatient(user.getId(), user.getName(), user.getLastname());
+            
             if (result.next()) {
                 DefaultTableModel model = (DefaultTableModel)resultTable.getModel();
-                do {
                     String [] row = {result.getString(3), result.getString(2), result.getString(1)};
                     model.addRow(row);
                     historyPatient.setText(result.getString(4));
-                } while(result.next());
             }
             
             else {
@@ -237,12 +252,14 @@ public class AttendPatient extends javax.swing.JInternalFrame {
         }
         
         catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "There was an error getting the user: " + e);
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
         PatientModel user = new PatientModel((String)resultTable.getModel().getValueAt(0,2), (String)resultTable.getModel().getValueAt(0,1), (String)resultTable.getModel().getValueAt(0,0), historyPatient.getText(), null);
         
         try {
@@ -288,6 +305,7 @@ public class AttendPatient extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField patientId;

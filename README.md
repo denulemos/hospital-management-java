@@ -27,6 +27,7 @@ CREATE TABLE `users` (
   UNIQUE KEY `ID_UNIQUE` (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+INSERT INTO `users` VALUES ('1','Admin','Lemon','admin',NULL,0),('2','Doctor','Lemon','admin','Pediatra',1000);
 
 
 CREATE TABLE `schedule` (

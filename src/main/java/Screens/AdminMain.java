@@ -56,11 +56,8 @@ public class AdminMain extends javax.swing.JFrame {
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem5 = new javax.swing.JMenuItem();
         logoutMenu = new javax.swing.JMenu();
 
         jMenuItem4.setText("jMenuItem4");
@@ -98,38 +95,32 @@ public class AdminMain extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem2);
 
-        jMenuItem6.setText("Edit Patient");
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem6ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem6);
-
         jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Schedule");
-
-        jMenuItem3.setText("Administrate");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+        jMenu3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu3MouseClicked(evt);
             }
         });
-        jMenu3.add(jMenuItem3);
-
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu3);
 
-        jMenu4.setText("Report");
-
-        jMenuItem5.setText("Generate");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+        jMenu4.setText("Generate Report");
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
             }
         });
-        jMenu4.add(jMenuItem5);
-
+        jMenu4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu4ActionPerformed(evt);
+            }
+        });
         jMenuBar1.add(jMenu4);
 
         logoutMenu.setText("Logout");
@@ -181,24 +172,6 @@ public class AdminMain extends javax.swing.JFrame {
          editPatient.setVisible(false);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        scheduleAdmin.setVisible(false);
-        generateReportAdmin.setVisible(true);
-        addPatient.setVisible(false);
-        registerDoctorScreen.setVisible(false);
-        registerAdmin.setVisible(false);
-         editPatient.setVisible(false);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        scheduleAdmin.setVisible(false);
-        generateReportAdmin.setVisible(true);
-        addPatient.setVisible(false);
-        registerDoctorScreen.setVisible(false);
-        registerAdmin.setVisible(false);
-         editPatient.setVisible(false);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
-
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         scheduleAdmin.setVisible(false);
         generateReportAdmin.setVisible(false);
@@ -208,14 +181,31 @@ public class AdminMain extends javax.swing.JFrame {
          editPatient.setVisible(false);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        scheduleAdmin.setVisible(false);
+    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+      
+    }//GEN-LAST:event_jMenu4ActionPerformed
+
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+        
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void jMenu3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu3MouseClicked
+          scheduleAdmin.setVisible(true);
         generateReportAdmin.setVisible(false);
         addPatient.setVisible(false);
         registerDoctorScreen.setVisible(false);
         registerAdmin.setVisible(false);
-         editPatient.setVisible(true);
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
+         editPatient.setVisible(false);
+    }//GEN-LAST:event_jMenu3MouseClicked
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+           scheduleAdmin.setVisible(false);
+        generateReportAdmin.setVisible(true);
+        addPatient.setVisible(false);
+        registerDoctorScreen.setVisible(false);
+        registerAdmin.setVisible(false);
+         editPatient.setVisible(false);
+    }//GEN-LAST:event_jMenu4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -260,10 +250,7 @@ public class AdminMain extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenu logoutMenu;
     // End of variables declaration//GEN-END:variables

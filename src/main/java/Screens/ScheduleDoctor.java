@@ -7,6 +7,8 @@ package Screens;
 import Controllers.PatientController;
 import Controllers.ScheduleController;
 import Controllers.UserController;
+import Validators.PatientValidator;
+import Validators.ScheduleValidator;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
@@ -198,7 +200,7 @@ public class ScheduleDoctor extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
        LocalDateTime time = scheduleDoctor.getDateTimePermissive();
-       if (time == null || time.getHour() == 0) {
+       if (time == null) {
            JOptionPane.showMessageDialog(null, "All fields must be filled");
            return;
        }
@@ -206,18 +208,14 @@ public class ScheduleDoctor extends javax.swing.JInternalFrame {
        String specialty = UserController.currentUser.getSpecialty();
        int price = UserController.currentUser.getPrice();
        try {
-          ResultSet result = schedController.getScheduleByDateandDoctor(time, doctor);
-          if (result.next()) {
-              JOptionPane.showMessageDialog(null, "This date is already occuped by another existing appointment");
-              return;
-          }
-           
+          ScheduleValidator.isScheduleOccuped(time, doctor);  
            schedController.createSchedule(doctor, time, price, specialty);
            JOptionPane.showMessageDialog(null, "Appointment created");
            refreshData();
        }
        catch (Exception e) {
-           JOptionPane.showMessageDialog(null, "There was an error trying to create the appointment");
+           JOptionPane.showMessageDialog(null, "There was an error:" + e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -243,21 +241,21 @@ public class ScheduleDoctor extends javax.swing.JInternalFrame {
             String patient = (String) resultTable.getValueAt(i, 2);
             int price = Integer.valueOf((String)resultTable.getValueAt(i, 3));
             String taken = (String) resultTable.getValueAt(i, 4);
-        
-            try {
-                schedController.updateSchedule(id, patient, price, taken);
               
+            try {
+                ScheduleValidator.validateTake(patient, taken);
+                PatientValidator.checkIfUserExists(patient);
+                schedController.updateSchedule(id, patient, price, taken);
             }
             catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "There was an error updating appointment " + id);
+                JOptionPane.showMessageDialog(null, e.getMessage(),
+						"Error", JOptionPane.ERROR_MESSAGE);
             }
-            
-            
-           
+               
         }
         
           JOptionPane.showMessageDialog(null, "Appointments Updated");
-                refreshData();
+          refreshData();
     }//GEN-LAST:event_jButton3ActionPerformed
 
 

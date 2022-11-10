@@ -25,16 +25,7 @@ public class UserModel {
         this.price = price;
         this.password = password;
     }
-
-    public boolean isIsDoctor() {
-        return isDoctor;
-    }
-
-    public void setIsDoctor(boolean isDoctor) {
-        this.isDoctor = isDoctor;
-    }
     
-
     public String getName() {
         return name;
     }
