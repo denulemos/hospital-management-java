@@ -7,7 +7,6 @@ public class UserModel {
     private String specialty;
     private String password;
     private int price;
-    private boolean isDoctor = specialty != null;
 
     public UserModel(String name, String lastname, String id, String specialty, int price, String password) {
         this.name = name;

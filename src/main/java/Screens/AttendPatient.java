@@ -1,9 +1,9 @@
 
 package screens;
 
-import Controllers.PatientController;
-import Models.PatientModel;
-import Validators.FieldValidator;
+import controllers.PatientController;
+import models.PatientModel;
+import validators.FieldValidator;
 import java.sql.ResultSet;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
