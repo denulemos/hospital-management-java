@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Validators;
 
-import Controllers.ScheduleController;
+package validators;
+
+import controllers.ScheduleController;
 import exceptions.CantTakeAppointmentWithoutPatientException;
 import exceptions.ScheduleOccupedException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 
-/**
- *
- * @author Denu
- */
+
 public class ScheduleValidator {
     public static void isScheduleOccuped(LocalDateTime date, String doctor) throws ScheduleOccupedException, SQLException {
         ScheduleController controller = new ScheduleController();

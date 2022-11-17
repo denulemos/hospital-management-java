@@ -1,17 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Controllers;
+package controllers;
 
-import Provider.ConnectionProvider;
+import provider.ConnectionProvider;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Denu
- */
+
 public class AdministratorController {
     public void addAdmin (String id, String name, String lastname, String password) throws SQLException {
         Statement statement = ConnectionProvider.getConnection().createStatement();

@@ -1,19 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Controllers;
 
-import Provider.ConnectionProvider;
+package controllers;
+
+import provider.ConnectionProvider;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Denu
- */
+
 public class DoctorController {
     Connection connection = ConnectionProvider.getConnection();
      public ResultSet getAllDoctors () throws SQLException {

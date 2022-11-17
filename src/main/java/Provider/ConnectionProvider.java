@@ -1,18 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Provider;
+package provider;
 
-import Utils.Constants;
+import utils.Constants;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
 
-/**
- *
- * @author Denu
- */
 public class ConnectionProvider {
     public static Connection getConnection() {
         try {

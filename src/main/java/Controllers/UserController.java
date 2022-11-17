@@ -1,20 +1,11 @@
-package Controllers;
+package controllers;
 
-import Models.UserModel;
-import Provider.ConnectionProvider;
+import models.UserModel;
+import provider.ConnectionProvider;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author Denu
- */
 public class UserController {
     
    public static UserModel currentUser;

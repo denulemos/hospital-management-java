@@ -1,34 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
-package Screens;
 
-import Controllers.ScheduleController;
-import Controllers.UserController;
-import Validators.DateValidator;
+package screens;
+
+import controllers.ScheduleController;
+import controllers.UserController;
+import validators.DateValidator;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Denu
- */
+
 public class GenerateReportDoctor extends javax.swing.JInternalFrame {
 
     ScheduleController schedController = new ScheduleController();
     DateValidator dateValidator = new DateValidator();
-    /**
-     * Creates new form GenerateReportDoctor
-     */
+   
     public GenerateReportDoctor() {
         initComponents();
     }
 
-    @SuppressWarnings("unchecked")
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+  
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
@@ -159,13 +150,13 @@ public class GenerateReportDoctor extends javax.swing.JInternalFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
         this.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
        LocalDateTime from = fromDate.getDateTimePermissive();
        LocalDateTime to = toDate.getDateTimePermissive();
       
@@ -194,10 +185,10 @@ public class GenerateReportDoctor extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, e.getMessage(),
 						"Error!", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
+
     private javax.swing.JLabel TotalAmount;
     private javax.swing.JLabel amountGain;
     private com.github.lgooddatepicker.components.DateTimePicker fromDate;
@@ -211,5 +202,5 @@ public class GenerateReportDoctor extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable resultTable;
     private com.github.lgooddatepicker.components.DateTimePicker toDate;
-    // End of variables declaration//GEN-END:variables
+  
 }
